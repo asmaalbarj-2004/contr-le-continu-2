@@ -100,6 +100,21 @@ df = df.drop_duplicates()
 print("\nDataset après nettoyage :")
 print(df.info())
 ```
+# Valeurs manquantes détectées : 0 sur toutes les 18 colonnes
+# Ce que cela signifie :
+
+# Qualité des données ⭐⭐⭐⭐⭐
+
+# Le dataset est complet et de haute qualité
+# Aucune imputation nécessaire
+# Pas de risque de biais introduit par le remplissage de valeurs
+
+
+# Prêt pour l'analyse
+
+# Pas besoin de techniques d'imputation complexes (KNN, MICE, etc.)
+# Les 3 900 observations sont exploitables immédiatement
+# Réduction du temps de prétraitement
 ```python
 # ======================================================
 # 4️⃣ Statistiques descriptives
@@ -110,6 +125,15 @@ print(df.describe())
 print("\nStatistiques catégorielles :")
 print(df.describe(include="object"))
 ```
+ # Distribution équilibrée : Le dataset couvre toutes les tranches d'âge adultes
+# 🎯 Cible principale : Adultes de 31-57 ans (50% des clients)
+# 👥 Diversité : Présence de jeunes adultes (18+) et seniors (jusqu'à 70 ans)
+# 📈 Marketing : Nécessité de stratégies différenciées par génération
+# Panier Moyen : ~60 USD
+# Ni trop bas (produits de qualité)
+# Ni trop élevé (accessibl
+# Variabilité modérée (CV = 39.6%)
+
 ```python
 # ======================================================
 # 5️⃣ Encodage des variables catégorielles
@@ -134,6 +158,8 @@ sns.heatmap(
 plt.title("Matrice de corrélation des caractéristiques", fontsize=16) # More descriptive title
 plt.show()
 ```
+<img src="matrice decorrelation.png" style="height:300px;margin-right:200px"/> 
+
 ```python
 # ======================================================
 # 8️⃣ Modélisation avec Random Forest
@@ -164,6 +190,8 @@ plt.xlabel("Prédictions")
 plt.ylabel("Valeurs réelles")
 plt.show()
 ```
+<img src="matrice de confusion.png" style="height:300px;margin-right:200px"/> 
+
 ```python
 # ======================================================
 # 🔟 Importance des variables + GRAPHE
@@ -181,9 +209,8 @@ sns.barplot(data=importances, x="Importance", y="Feature")
 plt.title("Importance des variables (Random Forest)")
 plt.show()
 ```
-
 ---
-
+ <img src="importance des variable.png" style="height:300px;margin-right:200px"/> 
 ## 6. Analyse des étapes du code
 
 ### 6.1. Nettoyage des données
