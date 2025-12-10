@@ -1,5 +1,7 @@
-# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour
 
+# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour
+<img src="ASSSSSSMAAAAAAA (1).jpg" style="height:200px;margin-right:150px"/>      
+# AL BARJ ASMA 
 ---
 
 ## 1. Titre de l'étude
@@ -36,8 +38,147 @@ Ce dataset permet d'étudier **comment et pourquoi** les clients réalisent leur
 ## 5. Code Python utilisé
 
 ```python
-# Insérer ici l'intégralité du code généré précédemment
-# Le code complet incluant toutes les étapes d'analyse
+# ======================================================
+# 1️⃣ Importation des bibliothèques
+# ======================================================
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+import os
+
+# ======================================================
+# 2️⃣ Chargement du dataset via KaggleHub
+# ======================================================
+dataset_directory = "/kaggle/input/shopping-behaviour-dataset"
+print(f"Files available in {dataset_directory}:")
+for root, dirs, files in os.walk(dataset_directory):
+    for file in files:
+        print(os.path.join(root, file))
+
+# IMPORTANT : mettre le nom exact du fichier CSV
+file_path = "shopping_behavior_updated.csv"
+
+df = kagglehub.load_dataset(
+    KaggleDatasetAdapter.PANDAS,
+    "grandmaster07/shopping-behaviour-dataset",
+    file_path,
+)
+
+print("Aperçu du dataset:")
+print(df.head())
+
+# ======================================================
+# 3️⃣ Vérification et Nettoyage des données
+# ======================================================
+print("\nValeurs manquantes :")
+print(df.isnull().sum())
+
+# Remplissage NA
+for col in df.columns:
+    if df[col].dtype == "object":
+        df[col] = df[col].fillna(df[col].mode()[0])
+    else:
+        df[col] = df[col].fillna(df[col].median())
+
+df = df.drop_duplicates()
+
+print("\nDataset après nettoyage :")
+print(df.info())
+
+# ======================================================
+# 4️⃣ Statistiques descriptives
+# ======================================================
+print("\nStatistiques numériques :")
+print(df.describe())
+
+print("\nStatistiques catégorielles :")
+print(df.describe(include="object"))
+
+# ======================================================
+# 5️⃣ Encodage des variables catégorielles
+# ======================================================
+label = LabelEncoder()
+
+for col in df.select_dtypes(include="object"):
+    df[col] = label.fit_transform(df[col])
+
+# ======================================================
+# 6️⃣ Matrice de corrélation
+# ======================================================
+plt.figure(figsize=(12, 9)) # Slightly increased figure size for better visibility
+sns.heatmap(
+    df.corr(),
+    annot=True,     # Show the correlation values on the heatmap
+    fmt=".2f",      # Format annotations to two decimal places
+    cmap="coolwarm", # Colormap to visualize the correlation strength
+    linewidths=.5   # Add lines between cells for better separation
+)
+plt.title("Matrice de corrélation des caractéristiques", fontsize=16) # More descriptive title
+plt.show()
+
+
+# ======================================================
+# 7️⃣ Définition des variables & choix de la cible
+# ======================================================
+X = df.drop("Gender", axis=1)
+y = df["Gender"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# ======================================================
+# 8️⃣ Modélisation avec Random Forest
+# ======================================================
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# ======================================================
+# 9️⃣ Évaluation du modèle
+# ======================================================
+y_pred = model.predict(X_test)
+
+print("\nRapport de classification :")
+print(classification_report(y_test, y_pred))
+
+cm = confusion_matrix(y_test, y_pred)
+print("\nMatrice de confusion brute :")
+print(cm)
+
+# 🔵 Matrice de confusion en graphique
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Pred Homme", "Pred Femme"],
+            yticklabels=["Réel Homme", "Réel Femme"])
+plt.title("Matrice de confusion")
+plt.xlabel("Prédictions")
+plt.ylabel("Valeurs réelles")
+plt.show()
+
+# ======================================================
+# 🔟 Importance des variables + GRAPHE
+# ======================================================
+importances = pd.DataFrame({
+    "Feature": X.columns,
+    "Importance": model.feature_importances_
+}).sort_values(by="Importance", ascending=False)
+
+print("\nImportance des variables :")
+print(importances)
+
+plt.figure(figsize=(10, 5))
+sns.barplot(data=importances, x="Importance", y="Feature")
+plt.title("Importance des variables (Random Forest)")
+plt.show()
 ```
 
 ---
@@ -145,40 +286,6 @@ Le modèle met en évidence les variables expliquant le mieux le comportement é
 
 Cette étude du dataset **Shopping Behaviour** a permis d'explorer en détail les facteurs influençant les décisions d'achat des clients à travers une **analyse statistique, visuelle et prédictive**.
 
-### Points clés de l'analyse :
-
-1. **Pipeline structuré** : Nettoyage → Étude descriptive → Corrélation → Modélisation
-2. **Tendances significatives** dégagées grâce aux visualisations et statistiques
-3. **Variables impactantes** identifiées via l'analyse d'importance
-4. **Modèle Random Forest** performant avec validation rigoureuse
-
-### Résultats obtenus :
-
-Le modèle Random Forest, soutenu par une matrice de confusion et une analyse de l'importance des variables, a fourni une **compréhension claire et exploitable** du comportement des clients.
-
-### Applications pratiques :
-
-Ces résultats permettent d'orienter les **futures stratégies marketing et commerciales** :
-
-- 🎯 Ciblage personnalisé des clients
-- 💡 Optimisation des campagnes promotionnelles
-- 📈 Amélioration de l'expérience d'achat
-- 🔮 Prédiction des comportements futurs
-
----
-
-## 📚 Références techniques
-
-- **Dataset** : Shopping Behaviour (3 900 clients)
-- **Algorithme principal** : Random Forest Classifier
-- **Métriques d'évaluation** : Accuracy, Precision, Recall, F1-Score
-- **Outils utilisés** : Python, Pandas, Scikit-learn, Matplotlib, Seaborn
-
----
-
-**Date de l'analyse** : 2024  
-**Auteur** : [Votre nom]  
-**Contact** : [Votre email]
 
 ---
 
