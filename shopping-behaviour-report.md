@@ -1,7 +1,11 @@
 
-# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour
-<img src="ASSSSSSMAAAAAAA (1).jpg" style="height:200px;margin-right:150px"/>      
+# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour : MARKETING
+
+<img src="ASSSSSSMAAAAAAA (1).jpg" style="height:200px;margin-right:150px"/>   
+
 # AL BARJ ASMA 
+
+
 ---
 
 ## 1. Titre de l'étude
