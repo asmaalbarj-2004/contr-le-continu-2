@@ -256,17 +256,9 @@ Les statistiques descriptives ont fourni une première vue d'ensemble :
 
 ---
 
-### 6.3. Encodage des variables catégorielles
-**📍 Référence : Étape 5️⃣ du code**
 
-Les colonnes textuelles ont été transformées en valeurs numériques :
 
-- **Exemples** : Saison, Méthode de paiement, Catégorie
-- **Raison** : Permettre l'utilisation des modèles de machine learning
-
----
-
-### 6.4. Matrice de corrélation
+### 6.3. Matrice de corrélation
 **📍 Référence : Étape 6️⃣ du code**
 
 La matrice de corrélation met en évidence :
@@ -279,7 +271,7 @@ La matrice de corrélation met en évidence :
 
 ---
 
-### 6.5. Modélisation avec Random Forest
+### 6.4. Modélisation avec Random Forest
 **📍 Référence : Étape 8️⃣ du code**
 
 **Pourquoi Random Forest ?**
@@ -293,7 +285,7 @@ La matrice de corrélation met en évidence :
 
 ---
 
-### 6.6. Matrice de confusion et évaluation
+### 6.5. Matrice de confusion et évaluation
 **📍 Référence : Étape 9️⃣ du code**
 
 Les résultats du modèle sont évalués grâce à :
@@ -311,7 +303,7 @@ Les résultats du modèle sont évalués grâce à :
 
 ---
 
-### 6.7. Importance des variables
+### 6.6. Importance des variables
 **📍 Référence : Étape 🔟 du code**
 
 Le modèle met en évidence les variables expliquant le mieux le comportement étudié.
