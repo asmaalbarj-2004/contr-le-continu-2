@@ -1,9 +1,7 @@
-
-# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour : MARKETING
-
+# AL BARJ ASMA
 <img src="ASSSSSSMAAAAAAA (1).jpg" style="height:200px;margin-right:150px"/>   
 
-# AL BARJ ASMA 
+# 🛒 Compte Rendu : Analyse du Dataset Shopping Behaviour : MARKETING 
 
 
 ---
