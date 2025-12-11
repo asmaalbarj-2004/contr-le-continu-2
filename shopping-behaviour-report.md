@@ -159,6 +159,13 @@ label = LabelEncoder()
 for col in df.select_dtypes(include="object"):
     df[col] = label.fit_transform(df[col])
 ```
+ les valeurs les plus fréquentes :
+
+ Genre le plus représenté : Male
+
+ Saison la plus achetée : Spring
+
+ Méthode de paiement la plus utilisée : PayPal
 ```python
 # ======================================================
 # 6️⃣ Matrice de corrélation
@@ -174,6 +181,7 @@ sns.heatmap(
 plt.title("Matrice de corrélation des caractéristiques", fontsize=16) # More descriptive title
 plt.show()
 ```
+La corrélation montre qu’il n’y a pas de relation forte entre les variables numériques, ce qui signifie que le comportement d’achat dépend plutôt des variables catégorielles.
 <img src="matrice decorrelation.png" style="height:300px;margin-right:200px"/> 
 
 ```python
